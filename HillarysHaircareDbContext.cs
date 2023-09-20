@@ -58,16 +58,18 @@ public class HillarysHairCareDbContext : DbContext
 
         modelBuilder.Entity("AppointmentService").HasData(new Object[]
         {  
-            new { AppointmentId = 1, ServiceId = 1 },
-            new { AppointmentId = 1, ServiceId = 2 },
-            new { AppointmentId = 2, ServiceId = 1 },
-            new { AppointmentId = 3, ServiceId = 3 },
-            new { AppointmentId = 3, ServiceId = 1 },
-            new { AppointmentId = 3, ServiceId = 5 },
-            new { AppointmentId = 4, ServiceId = 1 },
-            new { AppointmentId = 4, ServiceId = 4 },
-            new { AppointmentId = 5, ServiceId = 3 },
-            new { AppointmentId = 5, ServiceId = 2 }
+            new { AppointmentsId = 1, ServicesId = 1 },
+            new { AppointmentsId = 1, ServicesId = 2 },
+            new { AppointmentsId = 2, ServicesId = 1 },
+            new { AppointmentsId = 3, ServicesId = 3 },
+            new { AppointmentsId = 3, ServicesId = 1 },
+            new { AppointmentsId = 3, ServicesId = 5 },
+            new { AppointmentsId = 4, ServicesId = 1 },
+            new { AppointmentsId = 4, ServicesId = 4 },
+            new { AppointmentsId = 5, ServicesId = 3 },
+            new { AppointmentsId = 5, ServicesId = 2 }
         });
     }
 }
+
+//AppointmentsId, ServicesId are what EF Core is expecting, remember the "s", otherwise it's not gonna be seeded successfully. 
