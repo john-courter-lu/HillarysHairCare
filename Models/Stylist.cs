@@ -8,6 +8,6 @@ public class Stylist
     [Required]
     public string Name { get; set; }
     [Required]
-    public bool isActive { get; set; }
+    public bool IsActive { get; set; }
     public List<Appointment> Appointments { get; set; }
 }
