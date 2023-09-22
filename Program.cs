@@ -44,5 +44,23 @@ app.MapGet("/api/appointments", (HillarysHairCareDbContext db) =>
         .Include(a => a.Customer);
 });
 
+// get appointment by id
+app.MapGet("api/appointments/{id}", (HillarysHairCareDbContext db, int id) =>
+{
+
+    Appointment matchedAppointment = db.Appointments
+        .Include(a => a.Stylist)
+        .Include(a => a.Customer)
+        .Include(a => a.Services)
+        .SingleOrDefault(a => a.Id == id);
+
+    if(matchedAppointment == null)
+    {
+        return Results.NotFound();
+    }
+    
+    return Results.Ok(matchedAppointment);
+});
+
 app.Run();
 
