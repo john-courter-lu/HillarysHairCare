@@ -22,6 +22,7 @@ export default function AppoitmentList() {
             <th>Id</th>
             <th>Customer</th>
             <th>Stylist</th>
+            <th>Date</th>
             <th>Time</th>
             <th></th>
           </tr>
@@ -32,7 +33,8 @@ export default function AppoitmentList() {
               <th scope="row">{obj.id}</th>
               <td>{obj.customer?.name}</td>
               <td>{obj.stylist?.name}</td>
-              <th scope="row">{obj.date}</th>
+              <td>{new Date(obj.date).toLocaleDateString()}</td>
+              <td>{new Date(obj.date).toLocaleTimeString(undefined,{hour:"2-digit", minute: "2-digit", hour12: true})}</td>
               <td>
                 <Link to={`${obj.id}`}>Details</Link>
               </td>
@@ -43,3 +45,15 @@ export default function AppoitmentList() {
     </div>
   );
           }
+
+          //more sytax about time format
+          //new Date().toLocaleDateString(undefined, options)
+
+            //options = {
+            //     year: "numeric",
+            //     month: "2-digit",
+            //     day: "2-digit",
+            //     hour: "2-digit",
+            //     minute: "2-digit",
+            //     hour12: true,
+            //   };
