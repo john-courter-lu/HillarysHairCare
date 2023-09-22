@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { Table } from "reactstrap";
-import { getAppoitments } from "../../dataProvider/appoitmentsData";
+import { getAppointments } from "../../dataProvider/appointmentsData";
 import { Link } from "react-router-dom";
 
 export default function AppoitmentList() {
-  const [appoitments, setAppoitments] = useState([]);
+  const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    getAppoitments().then(setAppoitments);
+    getAppointments().then(setAppointments);
   }, []);
 
   return (
     <div className="container">
       <div className="sub-menu bg-light">
-        <h4>Appoitments</h4>
-        <Link to="/appoitments/create">Add</Link>
+        <h4>Appointments</h4>
+        <Link to="/appointments/create">Add</Link>
       </div>
       <Table>
         <thead>
@@ -27,8 +27,8 @@ export default function AppoitmentList() {
           </tr>
         </thead>
         <tbody>
-          {appoitments.map((obj) => (
-            <tr key={`appoitments-${obj.id}`}>
+          {appointments.map((obj) => (
+            <tr key={`appointments-${obj.id}`}>
               <th scope="row">{obj.id}</th>
               <td>{obj.customer?.name}</td>
               <td>{obj.stylist?.name}</td>
