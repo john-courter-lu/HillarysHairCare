@@ -1,2 +1,13 @@
+.sub-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  padding: 1rem 0;
+}
+.sub-menu a {
+  margin-left: 1rem;
+  align-self: center;
+}
 
 
