@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 function App() {
   return (
     <>
-      <Navbar color="info" expand="lg">
+      <Navbar color="primary" expand="sm">
         <Nav navbar>
           <NavbarBrand href="/">Hillary's Hair Care</NavbarBrand>
           <NavItem>
