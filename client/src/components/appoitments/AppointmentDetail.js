@@ -19,7 +19,7 @@ export default function AppointmentDetail() {
 
   return (
     <div className="container">
-      <h2>{appointment.id}</h2>
+      <h2 className="sub-menu bg-light"> Appointment No.{appointment.id}</h2>
       <Table>
         <tbody>
           <tr>
@@ -54,11 +54,42 @@ export default function AppointmentDetail() {
                     style: 'currency',
                     currency: 'USD',
                     minimumFractionDigits: 2 
-                    })}
+                    })
+                || "N/A"}
              </td>
           </tr>
         </tbody>
       </Table>
+
+      <h5 className="sub-menu bg-light">Service and Cost Details</h5>
+      {appointment.services?.length ? (
+        <Table>
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            {appointment.services.map((obj) => (
+              <tr key={`service-${obj.id}`}>
+                <td>{obj.name}</td>
+                <td>
+                    {obj.price.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 2 
+                    }) 
+                    || "N/A"}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      ) : (
+        <p>No service information for this appointment</p>
+      )}
+
     </div>
   );
 }
