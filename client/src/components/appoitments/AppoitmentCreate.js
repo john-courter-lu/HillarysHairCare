@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { getStylists } from "../../dataProvider/stylistsData.js";
 import { getCustomers } from "../../dataProvider/customersData.js";
+import { getServices } from "../../dataProvider/servicesData.js";
 import { useNavigate } from "react-router-dom/dist";
 
 
@@ -13,10 +14,13 @@ export default function AppointmentCreate() {
   const [stylistId, setStylistId] = useState(0);
   const [customers, setCustomers] = useState([]);
   const [stylists, setStylists] = useState([]);
+  const [services, setServices] = useState([]);
 
   useEffect(() => {
     getCustomers().then(setCustomers);
     getStylists().then(setStylists);
+    getServices().then(setServices);
+    
   }, []);
 
   const submit = () => {
@@ -62,14 +66,14 @@ export default function AppointmentCreate() {
         </FormGroup>
 
         <FormGroup>
-            
-          <Label htmlFor="stylists">Stylists</Label>
 
-          {stylists.map((s) => (
+          <Label htmlFor="services">Services</Label>
+
+          {services.map((s) => (
 
                 <div key={s.id}>
                     <Input
-                            name={`stylist-${s.id}`}
+                            name={`service-${s.id}`}
                             type="checkbox"
                             value={s.id}
                             checked={false}
@@ -77,7 +81,9 @@ export default function AppointmentCreate() {
                         >
                     </Input>
 
-                    <Label htmlFor="stylist-${s.id}">{s.name}</Label>
+                    <Label htmlFor="service-${s.id}">
+                             {s.name}
+                    </Label>
                 </div>
                 
             ))}
