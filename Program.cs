@@ -76,6 +76,11 @@ app.MapGet("/api/customers", (HillarysHairCareDbContext db) =>
     return db.Customers;
 });
 
+// get services for new appointments creating
+app.MapGet("/api/services", (HillarysHairCareDbContext db) =>
+{
+    return db.Services;
+});
 
 app.Run();
 
