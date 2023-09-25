@@ -4,6 +4,7 @@ import { getStylists } from "../../dataProvider/stylistsData.js";
 import { getCustomers } from "../../dataProvider/customersData.js";
 import { getServices } from "../../dataProvider/servicesData.js";
 import { useNavigate } from "react-router-dom/dist";
+import { createAppointment } from "../../dataProvider/appointmentsData.js";
 
 export default function AppointmentCreate() {
   const navigate = useNavigate();
@@ -24,7 +25,15 @@ export default function AppointmentCreate() {
   }, []);
 
   const submit = () => {
-    window.alert("submit button clicked")
+    const newAppointment = {
+        "date": dateTime,
+        "stylistId": stylistId,
+        "customerId": customerId
+      };
+  
+      createAppointment(newAppointment).then(() => {
+        navigate("/appointments");
+      });
   };
 
   return (
