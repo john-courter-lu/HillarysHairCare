@@ -60,6 +60,30 @@ export default function AppointmentCreate() {
             ))}
           </Input>
         </FormGroup>
+
+        <FormGroup>
+            
+          <Label htmlFor="stylists">Stylists</Label>
+
+          {stylists.map((s) => (
+
+                <div key={s.id}>
+                    <Input
+                            name={`stylist-${s.id}`}
+                            type="checkbox"
+                            value={s.id}
+                            checked={false}
+                            onChange={() => {window.alert("checked")}}
+                        >
+                    </Input>
+
+                    <Label htmlFor="stylist-${s.id}">{s.name}</Label>
+                </div>
+                
+            ))}
+
+        </FormGroup>
+
         <Button onClick={submit}>Submit</Button>
       </Form>
     </div>
