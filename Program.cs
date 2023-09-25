@@ -82,5 +82,40 @@ app.MapGet("/api/services", (HillarysHairCareDbContext db) =>
     return db.Services;
 });
 
+// Post a new appoitment without services
+app.MapPost("/api/appointments", (HillarysHairCareDbContext db, Appointment newAppointment) =>
+{
+
+    // Id will be taken care of by EF Core;
+    // Stylist, Customer will be taken care of by .Include() in other MapGet endpoints; or use SingleOrDefault
+    // Services need to be added to AppointmentService database
+   
+
+    try
+    {
+       
+        db.Appointments.Add(newAppointment);
+        db.SaveChanges();
+        return Results.Created($"/api/appointments/{newAppointment.Id}", newAppointment);
+
+    }
+    catch (DbUpdateException) 
+    {
+        return Results.BadRequest("Invalid data submitted");
+    }
+    
+    // If the SaveChanges() method encounters any database-related issues (such as constraint violations or database connectivity problems), it can throw a DbUpdateException. 
+});
+
+/* 
+ use this json to test the endpiont:
+ 
+    {
+    "date": "2023-09-25T19:48:01.023Z",
+    "stylistId": 1,
+    "customerId": 1
+    } 
+  
+*/
 app.Run();
 
