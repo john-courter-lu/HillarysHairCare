@@ -5,6 +5,9 @@ import { getCustomers } from "../../dataProvider/customersData.js";
 import { getServices } from "../../dataProvider/servicesData.js";
 import { useNavigate } from "react-router-dom/dist";
 
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function AppointmentCreate() {
   const navigate = useNavigate();
@@ -12,6 +15,7 @@ export default function AppointmentCreate() {
   //const [appointmentServices, setAppointmentServices] = useState("");
   const [customerId, setCustomerId] = useState(0);
   const [stylistId, setStylistId] = useState(0);
+  const [dateTime, setDateTime] = useState('');
   const [customers, setCustomers] = useState([]);
   const [stylists, setStylists] = useState([]);
   const [services, setServices] = useState([]);
@@ -64,7 +68,20 @@ export default function AppointmentCreate() {
             ))}
           </Input>
         </FormGroup>
-
+      
+        <FormGroup>
+            <Label htmlFor="appointmentDate">Date and Time</Label>
+            <Input
+              name="appointmentDate"
+              type="datetime-local"
+              id="appointmentDate"
+              value={dateTime}
+              onChange={(e) => {
+                setDateTime(e.target.value)
+                }}
+            />
+        </FormGroup>
+        
         <FormGroup>
 
           <Label htmlFor="services">Services</Label>
@@ -81,7 +98,7 @@ export default function AppointmentCreate() {
                         >
                     </Input>
 
-                    <Label htmlFor="service-${s.id}">
+                    <Label htmlFor={`service-${s.id}`}>
                              {s.name}
                     </Label>
                 </div>
