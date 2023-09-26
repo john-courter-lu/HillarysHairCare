@@ -37,5 +37,15 @@ export const cancelAppointment = async (id) => {
 };
 // 这个的error catching是最全面的了, 既有!response.ok 又有error. 
 // 同时有  return true; 不知是否有实质影响; 反正不用也行
+// We check response.status to see if it's equal to 204, which is the standard HTTP status code for a successful "No Content" response. If it is, we consider the removal as successful and return true.
 // 关于response.status的error handling必须要用 = async(id) 和 response = await fetch, 否则response.status永远是undefined, 也就是永远有error.
 // We use "await" with fetch to wait for the response.
+
+// edit an appointment
+export const updateAppointment = (id, appointment) => {
+  return fetch(`${_apiUrl}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json", },
+      body: JSON.stringify(appointment),
+  });
+};
