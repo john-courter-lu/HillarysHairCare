@@ -9,9 +9,10 @@ import { createAppointment } from "../../dataProvider/appointmentsData.js";
 export default function AppointmentCreate() {
   const navigate = useNavigate();
 
-  //const [appointmentServices, setAppointmentServices] = useState("");
+  const [serviceIds, setServiceIds] = useState([]);
   const [customerId, setCustomerId] = useState(0);
   const [stylistId, setStylistId] = useState(0);
+  
   const [dateTime, setDateTime] = useState('');
   const [customers, setCustomers] = useState([]);
   const [stylists, setStylists] = useState([]);
@@ -24,12 +25,37 @@ export default function AppointmentCreate() {
     
   }, []);
 
+  const handleCheckboxChange = (event) => {
+
+    //to ensure that the checkedValue variable contains an integer value instead of a string. 
+    // because checkbox values are typically stored as strings in the HTML value attribute
+    //the second argument is the radix or base for parsing. In this case, 10 is used as the radix, indicating base-10 (decimal). Otherwise, it may interpret as octal: "010" as 8.
+    const checkedValue = parseInt(event.target.value, 10);
+
+    if (event.target.checked) {
+      // If the checkbox is checked, add the value to the array
+      setServiceIds((prevServiceIds) => [...prevServiceIds, checkedValue]);
+    } else {
+      // If the checkbox is unchecked, remove the value from the array
+      setServiceIds((prevServiceIds) =>
+        prevServiceIds.filter((id) => id !== checkedValue)
+      );
+    }
+  };
+
   const submit = () => {
     const newAppointment = {
         "date": dateTime,
-        "stylistId": stylistId,
-        "customerId": customerId
+        stylistId,
+        customerId,
+        "service": serviceIds
       };
+
+    // stylistId and customerId are controlled/value-given with UseState
+    // as long as the property's name matches the jsonToSend's, the name is the only thing needed in an object, because the value is updated with UseState
+    // but if the name doesn't match the json body's, like the date and service, the name and value of the property need to be specified.
+
+      console.log(newAppointment)
   
       createAppointment(newAppointment).then(() => {
         navigate("/appointments");
@@ -98,8 +124,8 @@ export default function AppointmentCreate() {
                             name={`service-${s.id}`}
                             type="checkbox"
                             value={s.id}
-                            checked={false}
-                            onChange={() => {window.alert("checked")}}
+                            checked={serviceIds.includes(s.id)}
+                            onChange={handleCheckboxChange}
                         >
                     </Input>
 
