@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Table } from "reactstrap";
 import { getAppointments } from "../../dataProvider/appointmentsData";
 import { Link } from "react-router-dom";
+import {FaCoffee} from "react-icons";
+
 
 export default function AppoitmentList() {
   const [appointments, setAppointments] = useState([]);
