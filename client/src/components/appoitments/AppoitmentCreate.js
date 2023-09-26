@@ -48,8 +48,8 @@ export default function AppointmentCreate() {
         "date": dateTime,
         stylistId,
         customerId,
-        "service": serviceIds
-      };
+        "services": services.filter( s => serviceIds.includes(s.id))
+    }
 
     // stylistId and customerId are controlled/value-given with UseState
     // as long as the property's name matches the jsonToSend's, the name is the only thing needed in an object, because the value is updated with UseState
