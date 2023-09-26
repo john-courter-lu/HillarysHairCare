@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader, Table } from "reactstrap";
-import { getAppointments } from "../../dataProvider/appointmentsData";
+import { cancelAppointment, getAppointments } from "../../dataProvider/appointmentsData";
 import { Link } from "react-router-dom";
 import { BiDetail } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
@@ -36,13 +36,14 @@ export default function AppoitmentList() {
   const handleConfirmCancel = () => {
     // User confirmed cancellation
     toggleConfirmation(); // Close the confirmation modal
-
-    console.log(appointmentId)
+    
+    cancelAppointment(appointmentId) // talking to API
+      .then(getAppointments)
+      .then(setAppointments);
 
     setCancellationSuccessful(true); // Alert Control: Set cancellation success state to true
     setTimeout(() => setCancellationSuccessful(false), 3000); // Auto-dismiss after 3 seconds
-    /* cancelAppointment(appointmentId)
-      .then(() => getAllAppointments()); */
+    
   };
     
   return (

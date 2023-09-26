@@ -190,7 +190,7 @@ app.MapPost("/api/appointments", (HillarysHairCareDbContext db, Appointment newA
 */
 
 // delete an appointment
-app.MapDelete("/api/appointment/{id}", (HillarysHairCareDbContext db,int id) =>
+app.MapDelete("/api/appointments/{id}", (HillarysHairCareDbContext db,int id) =>
 {
 
     Appointment appointmentToRemove = db.Appointments.SingleOrDefault(appointment => appointment.Id == id);
