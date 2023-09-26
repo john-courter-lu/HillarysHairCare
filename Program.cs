@@ -95,6 +95,15 @@ app.MapPost("/api/appointments", (HillarysHairCareDbContext db, Appointment newA
     {
        
         db.Appointments.Add(newAppointment);
+
+        //test if we can construct the Service property inside this endpoint and save correctly to the database
+        newAppointment.Services = db.Services
+                                        .Where(s => s.Id == 3)
+                                        .ToList();
+        
+        //test success: 201 returned the correct body
+        //database check: MapGet("api/appointments/{id}") also returned the correct data and the TotalCost showed up correctly.
+
         db.SaveChanges();
         return Results.Created($"/api/appointments/{newAppointment.Id}", newAppointment);
 
@@ -109,7 +118,7 @@ app.MapPost("/api/appointments", (HillarysHairCareDbContext db, Appointment newA
 
 /* 
  use this json to test the endpiont:
- 
+
     {
     "date": "2023-09-25T19:48:01.023Z",
     "stylistId": 1,
@@ -117,5 +126,10 @@ app.MapPost("/api/appointments", (HillarysHairCareDbContext db, Appointment newA
     } 
   
 */
+
+// Post services for the newly created appointment
+
+
+
 app.Run();
 
