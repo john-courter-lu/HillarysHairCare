@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader, Spinner, Table } from "reactstrap";
 import { cancelAppointment, getAppointments } from "../../dataProvider/appointmentsData";
 import { Link } from "react-router-dom";
-import { BiDetail } from "react-icons/bi";
+import { BiDetail, BiEdit } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 
 
@@ -83,7 +83,7 @@ export default function AppoitmentList() {
 
               <td>
                 <Link to={`${obj.id}`}><BiDetail style={{ fontSize: '1.25rem'}}/></Link>
-                <Link to={`${obj.id}`}></Link>
+                <Link to={`${obj.id}/edit`}><BiEdit style={{ fontSize: '1.25rem'}}/></Link>
                 <span>
                     <MdDeleteOutline 
                      value={obj.id} /* not necessary, not always reliable */

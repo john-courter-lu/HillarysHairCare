@@ -16,6 +16,7 @@ root.render(
         <Route path="appointments">
           <Route index element={<AppoitmentList/>} />
           <Route path=":id" element={<AppointmentDetail/> } />
+          <Route path=":id/edit" element={"AppointmentUpdate"} />
           <Route path="create" element={<AppointmentCreate/> } />
         </Route>
       </Route>
