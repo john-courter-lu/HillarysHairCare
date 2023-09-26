@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader, Table } from "reactstrap";
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader, Spinner, Table } from "reactstrap";
 import { cancelAppointment, getAppointments } from "../../dataProvider/appointmentsData";
 import { Link } from "react-router-dom";
 import { BiDetail } from "react-icons/bi";
@@ -45,7 +45,11 @@ export default function AppoitmentList() {
     setTimeout(() => setCancellationSuccessful(false), 3000); // Auto-dismiss after 3 seconds
     
   };
-    
+  
+  if (appointments.length === 0) {
+    return <Spinner />
+    }
+
   return (
     <div className="container">
       <div className="sub-menu bg-light">
@@ -54,7 +58,7 @@ export default function AppoitmentList() {
       </div>
 
       {isCancellationSuccessful && (
-        <div className="alert alert-success">Cancellation Successful!</div>
+        <div className="floating-alert">Cancellation Successful!</div>
       )}
 
       <Table>
