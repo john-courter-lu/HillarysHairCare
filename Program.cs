@@ -235,5 +235,32 @@ app.MapPut("/api/appointments/{id}", (HillarysHairCareDbContext db, int id, Appo
 
     return Results.NoContent();
 });
+/* json to test
 
+{
+  "id":2,
+  "date": "2023-09-27T02:19:21.278Z",
+  "stylistId": 0,
+  "customerId": 0,
+  "services": [
+    {
+      "id": 2,
+      "name": "string",
+      "price": 0
+    }
+  ]
+}
+
+test sucess: no need for other data, MapPut endpoint doesn't need UpdatedAppoitment's all properties even as an instance of Appointment class, probably because only id is [required]
+{
+  "id":2,
+  "services": [
+    {
+      "id": 4,
+      "name": "string",
+      "price": 0
+    }
+  ]
+}
+ */
 app.Run();
