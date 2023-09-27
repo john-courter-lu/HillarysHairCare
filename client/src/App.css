@@ -10,4 +10,20 @@
   align-self: center;
 }
 
+.floating-alert {
+  position: fixed;
+  top: 2rem; /* Adjust this value to control how close it is to the top */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50; /* Background color */
+  color: white; /* Text color */
+  padding: 10px 20px; /* Padding */
+  border-radius: 4px; /* Rounded corners */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Box shadow */
+  z-index: 999; /* Ensure it's above other content */
+}
 
+.action-icon-container {
+  display: flex;
+  justify-content: space-between;
+}

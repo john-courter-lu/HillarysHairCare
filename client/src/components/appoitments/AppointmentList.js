@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader, Table } from "reactstrap";
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader, Spinner, Table } from "reactstrap";
 import { cancelAppointment, getAppointments } from "../../dataProvider/appointmentsData";
 import { Link } from "react-router-dom";
-import { BiDetail } from "react-icons/bi";
+import { BiDetail, BiEdit } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 
 
@@ -45,7 +45,11 @@ export default function AppoitmentList() {
     setTimeout(() => setCancellationSuccessful(false), 3000); // Auto-dismiss after 3 seconds
     
   };
-    
+  
+  if (appointments.length === 0) {
+    return <Spinner />
+    }
+
   return (
     <div className="container">
       <div className="sub-menu bg-light">
@@ -54,7 +58,7 @@ export default function AppoitmentList() {
       </div>
 
       {isCancellationSuccessful && (
-        <div className="alert alert-success">Cancellation Successful!</div>
+        <div className="floating-alert">Cancellation Successful!</div>
       )}
 
       <Table>
@@ -77,16 +81,16 @@ export default function AppoitmentList() {
               <td>{new Date(obj.date).toLocaleDateString()}</td>
               <td>{new Date(obj.date).toLocaleTimeString(undefined,{hour:"2-digit", minute: "2-digit", hour12: true})}</td>
 
-              <td>
-                <Link to={`${obj.id}`}><BiDetail style={{ fontSize: '1.25rem'}}/></Link>
-                <Link to={`${obj.id}`}></Link>
+              <td className="action-icon-container">
+                <Link to={`${obj.id}`}><BiDetail style={{ fontSize: '1.4rem'}}/></Link>
+                <Link to={`${obj.id}/edit`}><BiEdit style={{ fontSize: '1.4rem'}}/></Link>
                 <span>
                     <MdDeleteOutline 
                      value={obj.id} /* not necessary, not always reliable */
                      onClick={(e) => handleCancel(e, obj.id)}
                      /* Pass obj.id as a parameter to handleCancel, 
                         because e.target.value can act weird sometimes */
-                     style={{ fontSize: '1.25rem', color: "red" }} />
+                     style={{ fontSize: '1.4rem', color: "red" }} />
                 </span>
               </td>
 

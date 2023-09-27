@@ -97,11 +97,15 @@ app.MapPost("/api/appointments", (HillarysHairCareDbContext db, Appointment newA
    
     try
     {
+        if( newAppointment.Services != null ) { // with this error handling, newAppointment would still be able to be added when the services are not chosen. 
+
         var serviceIds = newAppointment.Services.Select(s => s.Id).ToList();
-      
+
         newAppointment.Services = db.Services
-        .Where(s => serviceIds.Contains(s.Id))
-        .ToList(); 
+            .Where(s => serviceIds.Contains(s.Id))
+            .ToList(); 
+
+        }
 
         db.Appointments.Add(newAppointment);
 
@@ -205,5 +209,58 @@ app.MapDelete("/api/appointments/{id}", (HillarysHairCareDbContext db,int id) =>
     return Results.NoContent();
 });
 
-app.Run();
+// edit an appointment, only services
+// edit an appointment
+app.MapPut("/api/appointments/{id}", (HillarysHairCareDbContext db, int id, Appointment updatedAppointment) =>
+{
+    // handle error or edge cases
+    if( updatedAppointment.Id != id || updatedAppointment.Services == null )
+    {
+        return Results.BadRequest("Unmatched or Empty data submitted");
+    }
+    
+    // get the appointment to be updated, include the services
+    var appointmentToUpdate = db.Appointments
+        .Include(a => a.Services)
+        .SingleOrDefault(a => a.Id == id);
 
+    //attach the services to the context; only handle and update Services
+    var serviceIds = updatedAppointment.Services.Select(s => s.Id).ToList();
+
+    appointmentToUpdate.Services  = db.Services
+        .Where(s => serviceIds.Contains(s.Id))
+        .ToList();
+
+    db.SaveChanges();
+
+    return Results.NoContent();
+});
+/* json to test
+
+{
+  "id":2,
+  "date": "2023-09-27T02:19:21.278Z",
+  "stylistId": 0,
+  "customerId": 0,
+  "services": [
+    {
+      "id": 2,
+      "name": "string",
+      "price": 0
+    }
+  ]
+}
+
+test sucess: no need for other data, MapPut endpoint doesn't need UpdatedAppoitment's all properties even as an instance of Appointment class, probably because only id is [required]
+{
+  "id":2, // "id":"2" will also pass
+  "services": [
+    {
+      "id": 4,
+      "name": "string",
+      "price": 0
+    }
+  ]
+}
+ */
+app.Run();
