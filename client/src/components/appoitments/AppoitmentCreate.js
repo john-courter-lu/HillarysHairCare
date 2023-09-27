@@ -138,7 +138,7 @@ export default function AppointmentCreate() {
 
         </FormGroup>
 
-        <Button onClick={submit}>Submit</Button>
+        <Button outline="ture" color="primary" block="ture" onClick={submit}>Submit</Button>
       </Form>
     </div>
   );
