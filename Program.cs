@@ -209,8 +209,6 @@ app.MapDelete("/api/appointments/{id}", (HillarysHairCareDbContext db,int id) =>
     return Results.NoContent();
 });
 
-app.Run();
-
 // edit an appointment, only services
 // edit an appointment
 app.MapPut("/api/appointments/{id}", (HillarysHairCareDbContext db, int id, Appointment updatedAppointment) =>
@@ -237,3 +235,5 @@ app.MapPut("/api/appointments/{id}", (HillarysHairCareDbContext db, int id, Appo
 
     return Results.NoContent();
 });
+
+app.Run();
