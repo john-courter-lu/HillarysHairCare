@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppoitmentList from "./components/appoitments/AppointmentList.js";
 import AppointmentDetail from "./components/appoitments/AppointmentDetail.js";
 import AppointmentCreate from "./components/appoitments/AppoitmentCreate.js";
+import AppointmentUpdate from "./components/appoitments/AppointmentUpdate.js";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,7 +17,7 @@ root.render(
         <Route path="appointments">
           <Route index element={<AppoitmentList/>} />
           <Route path=":id" element={<AppointmentDetail/> } />
-          <Route path=":id/edit" element={"AppointmentUpdate"} />
+          <Route path=":id/edit" element={<AppointmentUpdate/>} />
           <Route path="create" element={<AppointmentCreate/> } />
         </Route>
       </Route>
