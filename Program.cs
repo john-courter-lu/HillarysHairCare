@@ -253,7 +253,7 @@ app.MapPut("/api/appointments/{id}", (HillarysHairCareDbContext db, int id, Appo
 
 test sucess: no need for other data, MapPut endpoint doesn't need UpdatedAppoitment's all properties even as an instance of Appointment class, probably because only id is [required]
 {
-  "id":2,
+  "id":2, // "id":"2" will also pass
   "services": [
     {
       "id": 4,
