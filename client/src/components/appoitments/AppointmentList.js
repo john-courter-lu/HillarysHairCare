@@ -81,16 +81,16 @@ export default function AppoitmentList() {
               <td>{new Date(obj.date).toLocaleDateString()}</td>
               <td>{new Date(obj.date).toLocaleTimeString(undefined,{hour:"2-digit", minute: "2-digit", hour12: true})}</td>
 
-              <td>
-                <Link to={`${obj.id}`}><BiDetail style={{ fontSize: '1.25rem'}}/></Link>
-                <Link to={`${obj.id}/edit`}><BiEdit style={{ fontSize: '1.25rem'}}/></Link>
+              <td className="action-icon-container">
+                <Link to={`${obj.id}`}><BiDetail style={{ fontSize: '1.4rem'}}/></Link>
+                <Link to={`${obj.id}/edit`}><BiEdit style={{ fontSize: '1.4rem'}}/></Link>
                 <span>
                     <MdDeleteOutline 
                      value={obj.id} /* not necessary, not always reliable */
                      onClick={(e) => handleCancel(e, obj.id)}
                      /* Pass obj.id as a parameter to handleCancel, 
                         because e.target.value can act weird sometimes */
-                     style={{ fontSize: '1.25rem', color: "red" }} />
+                     style={{ fontSize: '1.4rem', color: "red" }} />
                 </span>
               </td>
 

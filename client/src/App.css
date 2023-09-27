@@ -23,3 +23,7 @@
   z-index: 999; /* Ensure it's above other content */
 }
 
+.action-icon-container {
+  display: flex;
+  justify-content: space-between;
+}
